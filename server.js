@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 
 /*DB SETUP*/
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ecarte', {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://armando:armando@cluster0-1qgup.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

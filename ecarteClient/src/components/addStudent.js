@@ -22,14 +22,14 @@ const AddStudent = ({updateStudents, courses}) => {
     const ticketRef = useRef();
     const printButtonRef = useRef();
 
-    const webcamRef = React.useRef(null);
+    /*const webcamRef = React.useRef(null);*/
 
-    const capture = React.useCallback(
+    /*const capture = React.useCallback(
         () => {
             const imageSrc = webcamRef.current.getScreenshot();
         },
         [webcamRef]
-    );
+    );*/
 
     const clearFields = () => {
         setName('')
@@ -112,15 +112,15 @@ const AddStudent = ({updateStudents, courses}) => {
 
             </Form>
 
-            <Webcam
+            {/*<Webcam
                 audio={false}
                 height={200}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 width={200}
                 videoConstraints={videoConstraints}
-            />
-            <button onClick={capture}>Capture photo</button>
+            />*/}
+            {/*<button onClick={capture}>Capture photo</button>*/}
             <div className="d-none">
                 <ReactToPrint
                     onAfterPrint={clearFields}
