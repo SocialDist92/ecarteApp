@@ -13,6 +13,8 @@ class AddCourse extends React.Component {
             name: '',
             price: 0.00
         };
+
+        this.originalState = this.state;
     }
 
     handleInput = (attr, e) => {
@@ -31,7 +33,8 @@ class AddCourse extends React.Component {
         e.preventDefault()
         axios.post('/api/add-course?name=' + this.state.name + '&price=' + this.state.price +
             '&startDate=' + this.state.startDate + '&endDate='+this.state.endDate).then(res => {
-                console.log(res.data)
+                this.props.addCourse(res.data);
+                this.setState(this.originalState);
         }).catch(err => {
                 console.error(err)
         })

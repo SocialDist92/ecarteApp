@@ -2,11 +2,20 @@ import React, {useState} from 'react';
 import {Table, Form, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash, faCartPlus} from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 
-const ListCourses = ({courses}) => {
+const ListCourses = ({courses, deleteCourse}) => {
     const [filteredCourses, setFilteredCourses] = useState(courses ? [...courses] : [])
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
-        "Noviembre", "Diciembre"];
+        "Noviembre", "Diciembre"]
+    const deleteCourseRequest = (id) => {
+        axios.post('/api/delete-course?id=' + id).then(
+            () => {
+                deleteCourse(id)
+            }
+        ).catch(e => console.error(e))
+    }
+
     React.useEffect(() => {
         setFilteredCourses(courses)
     }, [courses])
@@ -35,7 +44,8 @@ const ListCourses = ({courses}) => {
                                 <td>{startDate ? startDate.getDate() + ' de ' + months[startDate.getMonth()] : null}</td>
                                 <td>{endDate ? endDate.getDate() + ' de ' + months[endDate.getMonth()] : null}</td>
                                 <td>
-                                    <Button variant="danger"><FontAwesomeIcon icon={faTrash}/></Button>
+                                    <Button variant="danger" onClick={() => deleteCourseRequest(course._id)}><FontAwesomeIcon
+                                        icon={faTrash}/></Button>
                                 </td>
 
 

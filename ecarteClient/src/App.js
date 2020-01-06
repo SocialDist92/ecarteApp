@@ -30,6 +30,23 @@ class App extends React.Component {
             students: [...this.state.students, student]
         })
     }
+    addCourse = (course) => {
+        this.setState({
+            courses: [...this.state.courses, course]
+        })
+    }
+
+    deleteCourse = (id) => {
+        this.setState({
+            courses: this.state.courses.filter(course => course._id !== id)
+        })
+    }
+
+    deleteStudent = (id) => {
+        this.setState({
+            students: this.state.students.filter(student => student._id !== id)
+        })
+    }
 
     componentDidMount() {
         axios.get('/api/get-students').then(res => {
@@ -48,13 +65,13 @@ class App extends React.Component {
     renderContent = () => {
         switch (this.state.contentKey) {
             case 'list':
-                return <ListStudents students={this.state.students}/>
+                return <ListStudents deleteStudent={this.deleteStudent} courses={this.state.courses} students={this.state.students}/>
             case 'addStudent':
                 return <AddStudent courses={this.state.courses} updateStudents={this.updatedStudents}/>
             case 'addCourse':
-                return <AddCourse/>
+                return <AddCourse addCourse={this.addCourse}/>
             case 'listCourses':
-                return <ListCourses courses={this.state.courses}/>
+                return <ListCourses deleteCourse={this.deleteCourse} courses={this.state.courses}/>
         }
     }
 
