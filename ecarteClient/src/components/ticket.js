@@ -14,7 +14,7 @@ class Ticket extends Component {
 
     render() {
         return (
-            <div className="p-3" style={{fontSize: '40px'}}>
+            <div className="p-3">
                 <q>
                     Y si se cae el cielo
                     bailo bajo la tormenta
@@ -23,7 +23,7 @@ class Ticket extends Component {
                 <hr/>
 
 
-                <table style={{fontSize: '40px'}}>
+                <table>
                     <tbody>
                     <tr>
                         <th>Concepto</th>
