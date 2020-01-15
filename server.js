@@ -20,7 +20,8 @@ db.once('open', function () {
 const studentSchema = new mongoose.Schema({
     name: String,
     lastName: String,
-    courses: Array
+    courses: Array,
+    debt: String
 })
 const courseSchema = new mongoose.Schema({
     name: String,
@@ -56,12 +57,13 @@ app.post('/api/add-student', function (req, res) {
     if (req.body.name && req.body.lastName) {
         const name = req.body.name.toLowerCase();
         const lastName = req.body.lastName.toLowerCase();
+        const debt = parseFloat(req.body.debt).toFixed(2).toString()
         Student.findOne({name, lastName}, function (err, student) {
             if (err) return res.status(500).send(err)
             if (student) return res.status(500).send('user already exists')
             else {
 
-                const student = new Student({name, lastName, courses: req.body.courses})
+                const student = new Student({name, lastName, courses: req.body.courses, debt})
                 student.save(function (err, student) {
                     if (err) return res.status(500).send(err)
                     res.send(student)
